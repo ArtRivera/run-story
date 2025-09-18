@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -19,7 +20,10 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Run Story"
+// This allows access to depend of other modules in the app type safely.
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "RunStory"
 include(":app")
 include(":auth:data")
 include(":auth:domain")

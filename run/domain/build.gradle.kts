@@ -11,3 +11,8 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
+
+// Check if it is really needed
+//dependencies {
+//    implementation(libs.kotlinx.coroutines.core)
+//}
