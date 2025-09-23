@@ -17,7 +17,10 @@ junitVersion = "1.1.5"
 koin = "3.5.3"
 kotlin = "2.0.21"
 kotlinxSerialization = "1.6.3"
-ksp = "1.9.22-1.0.17"
+ksp = "2.0.21-1.0.28"
+ktor = "2.3.8"
+ktorClientLogging = "2.3.8"
+ktorServerCallLogging = "2.3.7"
 lifecycleRuntimeKtx = "2.6.1"
 maps = "4.3.3"
 material = "1.10.0"
@@ -25,6 +28,7 @@ materialIconsExtended = "1.6.3"
 mongoDbBson = "4.11.1"
 navigationCompose = "2.7.7"
 room = "2.6.1"
+secretsPlugin = "2.0.1"
 timber = "5.0.1"
 work = "2.9.0"
 
@@ -63,10 +67,21 @@ google-android-gms-play-services-location = { module = "com.google.android.gms:p
 google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-android-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization"}
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktorServerCallLogging" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 mongodb-bson = { module = "org.mongodb:bson", version.ref = "mongoDbBson" }
 
@@ -82,12 +97,47 @@ room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", vers
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-dynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin"}
+room = { id = "androidx.room", version.ref = "room" }
 runstory-android-application = { id = "runstory.android.application"}
 runstory-android-application-compose = { id = "runstory.android.application.compose"}
+runstory-android-feature-ui = { id = "runstory.android.feature.ui"}
+runstory-android-library = { id = "runstory.android.library"}
+runstory-android-library-compose = { id = "runstory.android.library.compose"}
+runstory-android-room = { id = "runstory.android.room"}
+runstory-jvm-library = { id = "runstory.jvm.library"}
+runstory-jvm-ktor = { id = "runstory.jvm.ktor"}
+
 
 [bundles]
-compose = ["androidx-compose-bom", "androidx-compose-ui", "androidx-compose-ui-graphics"]
+compose = [
+    "androidx-activity-compose",
+    "androidx-lifecycle-runtime-compose",
+    "androidx-lifecycle-viewmodel-compose",
+    "androidx-compose-material3",
+    "androidx-compose-ui",
+    "androidx-compose-ui-graphics",
+    "androidx-compose-ui-tooling-preview"
+]
+compose-debug = [
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-test-manifest"
+]
+koin = ["koin-android", "koin-android-workmanager", "koin-core"]
+koin-compose = ["koin-android", "koin-android-workmanager", "koin-core", "koin-androidx-compose"]
+ktor = [
+    "ktor-client-auth",
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-serialization-kotlinx-json",
+#    "ktor-server-call-logging",
+]
