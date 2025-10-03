@@ -51,4 +51,7 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    implementation(projects.core.presentation.ui)
+    implementation(projects.core.presentation.designSystem)
 }

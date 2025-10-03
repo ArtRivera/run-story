@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.project
 
 
 internal fun DependencyHandlerScope.addUiDependencies(project: Project) {
-    add("implementation", project(":core:presentation:design_system"))
+    add("implementation", project(":core:presentation:design-system"))
     add("implementation", project(":core:presentation:ui"))
 
     add("implementation", project.libs.findBundle("koin-compose").get())
