@@ -1,8 +1,8 @@
 package com.artrivera.core.domain.utils
 
-sealed interface DataError: Error {
+sealed interface DataError : Error {
 
-    enum class Network: DataError {
+    enum class Network : DataError {
         REQUEST_TIMEOUT,
         UNAUTHORIZED,
         NOT_FOUND,
@@ -11,10 +11,12 @@ sealed interface DataError: Error {
         INTERNAL_SERVER_ERROR,
         PAYLOAD_TOO_LARGE,
         PARSING_ERROR,
+
+        TOO_MANY_REQUESTS,
         UNKNOWN
     }
 
-    enum class Local: DataError {
+    enum class Local : DataError {
         DISK_FULL,
     }
 }

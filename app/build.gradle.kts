@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.runstory.android.application.compose)
+    alias(libs.plugins.runstory.android.application)
     alias(libs.plugins.runstory.jvm.ktor)
 }
 
@@ -54,4 +55,5 @@ dependencies {
 
     implementation(projects.core.presentation.ui)
     implementation(projects.core.presentation.designSystem)
+    implementation(projects.core.data)
 }

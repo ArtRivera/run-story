@@ -1,4 +1,4 @@
-package com.artrivera.core.data
+package com.artriveram.core.data
 
 import org.junit.Test
 

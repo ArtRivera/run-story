@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn com.artriveram.core.presentation.design_system.IconsKt
+-dontwarn com.artriveram.core.presentation.design_system.ThemeKt

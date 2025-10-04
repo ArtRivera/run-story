@@ -12,7 +12,7 @@ internal fun Project.configureBuildTypes(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
     extensionType: ExtensionType
 ) {
-    commonExtension.apply {
+    commonExtension.run {
         buildFeatures {
             buildConfig = true
         }
@@ -22,15 +22,11 @@ internal fun Project.configureBuildTypes(
                 buildTypes {
                     debug {
                         // Assuming you want to configure debug for applications as well
-                        apiKey?.let { it ->
-                            configureDebugBuild(it)
-                        }
+                        configureDebugBuild(apiKey)
                     }
 
                     release {
-                        apiKey?.let { it ->
-                            configureReleaseBuild(this@configure, it)
-                        }
+                        configureReleaseBuild(this@configure, apiKey)
                     }
 
                 }
@@ -41,15 +37,11 @@ internal fun Project.configureBuildTypes(
 
                     debug {
                         // Assuming you want to configure debug for applications as well
-                        apiKey?.let { it ->
-                            configureDebugBuild(it)
-                        }
+                        configureDebugBuild(apiKey)
                     }
 
                     release {
-                        apiKey?.let { it ->
-                            configureReleaseBuild(this@configure, it)
-                        }
+                        configureReleaseBuild(this@configure, apiKey)
                     }
 
                 }
@@ -60,7 +52,7 @@ internal fun Project.configureBuildTypes(
 
 private fun BuildType.configureDebugBuild(apiKey: String) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
-    buildConfigField("String", "BASE_URL", "\" https ://runique.pl-coding.com:8080\"")
+    buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
 }
 
 private fun BuildType.configureReleaseBuild(
@@ -68,7 +60,7 @@ private fun BuildType.configureReleaseBuild(
     apiKey: String
 ) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
-    buildConfigField("String", "BASE_URL", "\" https ://runique.pl-coding.com:8080\"")
+    buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
     isMinifyEnabled = true
     proguardFiles(
         commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
