@@ -6,11 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.artriveram.core.presentation.design_system.AnalyticsIcon
-import com.artriveram.core.presentation.design_system.RunStoryTheme
+import com.artrivera.auth.presentation.intro.IntroScreenRoot
+import com.artrivera.core.presentation.design_system.RunStoryTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +18,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             RunStoryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Icon(
+                    IntroScreenRoot(
                         modifier = Modifier.padding(innerPadding),
-                        imageVector = AnalyticsIcon, contentDescription = null
+                        onSignInClick = {},
+                        onSignUpClick = {}
                     )
                 }
             }

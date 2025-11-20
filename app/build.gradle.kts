@@ -56,4 +56,5 @@ dependencies {
     implementation(projects.core.presentation.ui)
     implementation(projects.core.presentation.designSystem)
     implementation(projects.core.data)
+    implementation(projects.auth.presentation)
 }

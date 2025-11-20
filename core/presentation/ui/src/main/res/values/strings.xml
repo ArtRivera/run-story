@@ -8,4 +8,5 @@
     <string name="error_internal_server_error">Ops! Something went wrong. Please try again later.</string>
     <string name="error_parsing_error">Parsing error detected.</string>
     <string name="error_unknown">Something unknown happened. We\'re trying to fix it.</string>
+    <string name="runstory">Run Story</string>
 </resources>
