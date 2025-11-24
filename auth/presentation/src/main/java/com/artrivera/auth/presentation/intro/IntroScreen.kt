@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,56 +50,59 @@ fun IntroScreenRoot(
 private fun IntroScreen(
     onAction: (IntroAction) -> Unit
 ) {
-    GradientBackground {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            contentAlignment = Alignment.Center
-        ) {
-            RunStoryLogo()
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .padding(bottom = 48.dp)
-        ) {
-            Text(
-                stringResource(
-                    R.string.welcome_to_runstory,
-                ),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                stringResource(R.string.rs_desc),
-                style = MaterialTheme.typography.bodySmall,
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            RunStoryOutlinedActionButton(
-                text = stringResource(R.string.sign_in),
-                isLoading = false,
-                enabled = true,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    onAction(IntroAction.OnSignInClick)
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            RunStoryActionButton(
-                text = stringResource(R.string.sign_up),
-                isLoading = false,
-                enabled = true,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    onAction(IntroAction.OnSignUpClick)
-                }
-            )
+    Scaffold { it ->
+        GradientBackground(modifier = Modifier.padding(it)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                RunStoryLogo()
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .padding(bottom = 48.dp)
+            ) {
+                Text(
+                    stringResource(
+                        R.string.welcome_to_runstory,
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 20.sp
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    stringResource(R.string.rs_desc),
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+                RunStoryOutlinedActionButton(
+                    text = stringResource(R.string.sign_in),
+                    isLoading = false,
+                    enabled = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {
+                        onAction(IntroAction.OnSignInClick)
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                RunStoryActionButton(
+                    text = stringResource(R.string.sign_up),
+                    isLoading = false,
+                    enabled = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {
+                        onAction(IntroAction.OnSignUpClick)
+                    }
+                )
 
+            }
         }
     }
+
 }
 
 @Composable

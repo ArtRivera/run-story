@@ -1,4 +1,4 @@
-package com.artrivera.auth.data
+package com.artriveram.auth.data
 
 import org.junit.Test
 

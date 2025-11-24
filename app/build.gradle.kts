@@ -36,7 +36,7 @@ dependencies {
     // Crypto
 //    implementation(libs.androidx.security.crypto.ktx)
 
-//    api(libs.core)
+    implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -56,5 +56,8 @@ dependencies {
     implementation(projects.core.presentation.ui)
     implementation(projects.core.presentation.designSystem)
     implementation(projects.core.data)
+    implementation(projects.core.domain)
     implementation(projects.auth.presentation)
+    implementation(projects.auth.domain)
+    implementation(projects.auth.data)
 }
