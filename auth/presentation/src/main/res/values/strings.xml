@@ -16,4 +16,6 @@
     <string name="password_requirement_contains_lowercase_char">Contains lowercase character</string>
     <string name="password_requirement_contains_uppercase_char">Contains uppercase character</string>
     <string name="register">Register</string>
+    <string name="error_email_exists">A user with that email already exists</string>
+    <string name="registration_succcessful">Registration successful! You can log in now.</string>
 </resources>

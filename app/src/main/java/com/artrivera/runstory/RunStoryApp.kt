@@ -2,6 +2,7 @@ package com.artrivera.runstory
 
 import android.app.Application
 import com.artrivera.auth.presentation.di.authViewModelModule
+import com.artrivera.core.data.di.coreDataModule
 import com.artrivera.runstory.di.appModule
 import com.artriveram.auth.data.di.authDataModule
 import org.koin.android.ext.koin.androidContext
@@ -24,6 +25,7 @@ class RunStoryApp : Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
+                coreDataModule,
                 appModule
             )
         }

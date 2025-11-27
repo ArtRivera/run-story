@@ -10,7 +10,8 @@ android {
 dependencies {
 
     implementation(libs.bundles.koin)
-//    implementation(projects.core.data)
     implementation(projects.core.domain)
+    implementation(projects.core.presentation.ui)
     implementation(projects.auth.domain)
+    implementation(projects.core.data)
 }
