@@ -1,7 +1,13 @@
 package com.artrivera.core.data
 
+import com.artrivera.core.domain.Session
+import com.artrivera.core.domain.SessionStorage
+import com.artrivera.core.domain.utils.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -14,7 +20,9 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import timber.log.Timber
 
-class HttpClientFactory {
+class HttpClientFactory(
+    private val sessionStorage: SessionStorage
+) {
 
     fun build(): HttpClient {
         return HttpClient(CIO) {
@@ -37,6 +45,50 @@ class HttpClientFactory {
             defaultRequest {
                 contentType(ContentType.Application.Json)
                 header("x-api-key", BuildConfig.API_KEY)
+            }
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        val info = sessionStorage.get()
+                        BearerTokens(
+                            accessToken = info?.accessToken ?: "",
+                            refreshToken = info?.refreshToken ?: ""
+                        )
+                    }
+
+                    refreshTokens {
+                        val info = sessionStorage.get()
+                        val response = client.post<AccessTokenRequest, AccessTokenResponse>(
+                            route = "/accessToken",
+                            body = AccessTokenRequest(
+                                refreshToken = info?.refreshToken ?: "",
+                                userId = info?.userId ?: ""
+                            )
+                        )
+
+                        when (response) {
+                            is Result.Success -> {
+                                val newSession = Session(
+                                    accessToken = response.data.accessToken,
+                                    refreshToken = info?.refreshToken ?: "",
+                                    userId = info?.userId ?: ""
+                                )
+                                sessionStorage.set(newSession)
+                                BearerTokens(
+                                    accessToken = newSession.accessToken,
+                                    refreshToken = newSession.refreshToken
+                                )
+                            }
+
+                            is Result.Error -> {
+                                BearerTokens(
+                                    accessToken = "",
+                                    refreshToken = ""
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }

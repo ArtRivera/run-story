@@ -1,4 +1,4 @@
-package com.artriveram.auth.data
+package com.artrivera.auth.data
 
 import com.artrivera.auth.domain.AuthRepository
 import com.artrivera.core.data.post
@@ -13,7 +13,7 @@ class AuthRepositoryImpl(private val httpClient: HttpClient) : AuthRepository {
     ): EmptyResult<DataError.Network> {
         return httpClient.post<RegisterRequest, Unit>(
             route = "/register",
-            request = RegisterRequest(email = email, password = password)
+            body = RegisterRequest(email = email, password = password)
         )
     }
 }

@@ -1,6 +1,5 @@
 package com.artrivera.auth.presentation.register
 
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artrivera.auth.domain.AuthRepository
@@ -67,25 +66,21 @@ class RegisterViewModel(
 
     fun onAction(action: RegisterAction) {
         when (action) {
-            RegisterAction.OnLoginClick -> {
+            RegisterAction.OnLoginClick -> Unit
+            RegisterAction.OnRegisterClick -> register()
+            RegisterAction.OnTogglePasswordVisibilityClick -> {
                 val isPasswordVisible = _state.value.isPasswordVisible
                 _state.value =
                     _state.value.copy(isPasswordVisible = !isPasswordVisible)
             }
-
-            RegisterAction.OnRegisterClick -> register()
-            RegisterAction.OnTogglePasswordVisibilityClick -> Unit
+            is RegisterAction.OnChangeEmail -> {
+                _state.value = _state.value.copy(email = action.email)
+            }
+            is RegisterAction.OnChangePassword -> {
+                _state.value = _state.value.copy(password = action.password)
+            }
         }
     }
-
-    fun onChangeEmail(newEmail: String) {
-        _state.value = _state.value.copy(email = newEmail)
-    }
-
-    fun onChangePassword(newPassword: String) {
-        _state.value = _state.value.copy(password = newPassword)
-    }
-
     private fun register() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isRegistering = true)

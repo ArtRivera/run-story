@@ -32,12 +32,12 @@ suspend inline fun <reified Response : Any> HttpClient.get(
 
 suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
     route: String,
-    request: Request
+    body: Request
 ): Result<Response, DataError.Network> {
     return safeCall {
         post {
             url(constructRoute(route))
-            setBody(request)
+            setBody(body)
         }
     }
 }

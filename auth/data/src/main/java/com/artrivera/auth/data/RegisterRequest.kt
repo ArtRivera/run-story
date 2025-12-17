@@ -1,4 +1,4 @@
-package com.artriveram.auth.data
+package com.artrivera.auth.data
 
 import kotlinx.serialization.Serializable
 

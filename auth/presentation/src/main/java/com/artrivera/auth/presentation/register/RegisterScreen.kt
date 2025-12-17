@@ -46,7 +46,6 @@ import com.artrivera.core.presentation.design_system.EmailIcon
 import com.artrivera.core.presentation.design_system.Poppins
 import com.artrivera.core.presentation.design_system.RunStoryTheme
 import com.artrivera.core.presentation.design_system.RuniqueDarkRed
-import com.artrivera.core.presentation.design_system.RuniqueGray
 import com.artrivera.core.presentation.design_system.RuniqueGreen
 import com.artrivera.core.presentation.design_system.components.GradientBackground
 import com.artrivera.core.presentation.design_system.components.RunStoryActionButton
@@ -64,6 +63,8 @@ fun RegisterScreenRoot(
 
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     ObserveAsEvents(flow = viewModel.events) { event ->
         when (event) {
@@ -90,28 +91,33 @@ fun RegisterScreenRoot(
     }
 
     RegisterScreen(
-        onAction = viewModel::onAction
+        state = state,
+        onAction = { action ->
+            when (action) {
+                RegisterAction.OnLoginClick -> onSignInClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
 
 @Composable
 private fun RegisterScreen(
-    viewModel: RegisterViewModel = koinViewModel(),
+    state: RegisterState,
     onAction: (RegisterAction) -> Unit,
 ) {
 
-    val state by viewModel.state.collectAsStateWithLifecycle()
-
-    val email by remember { mutableStateOf(TextFieldState()) }
-    val password by remember { mutableStateOf(TextFieldState()) }
+    val email by remember { mutableStateOf(TextFieldState(state.email)) }
+    val password by remember { mutableStateOf(TextFieldState(state.password)) }
 
     LaunchedEffect(email.text) {
-        viewModel.onChangeEmail(email.text.toString())
+        onAction(RegisterAction.OnChangeEmail(email.text.toString()))
     }
 
     LaunchedEffect(password.text) {
-        viewModel.onChangePassword(password.text.toString())
+        onAction(RegisterAction.OnChangePassword(password.text.toString()))
     }
 
     Scaffold { paddingValues ->
@@ -132,7 +138,7 @@ private fun RegisterScreen(
                     withStyle(
                         style = SpanStyle(
                             fontFamily = Poppins,
-                            color = RuniqueGray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     ) {
                         append(stringResource(R.string.already_have_an_account) + " ")
@@ -250,6 +256,7 @@ private fun PasswordRequirement(
 private fun RegisterScreenPrev() {
     RunStoryTheme {
         RegisterScreen(
+            state = RegisterState(),
             onAction = {}
         )
     }

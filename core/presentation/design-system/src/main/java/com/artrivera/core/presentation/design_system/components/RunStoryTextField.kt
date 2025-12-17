@@ -54,7 +54,9 @@ fun RunStoryTextField(
     modifier: Modifier = Modifier
 ) {
     var isFocused by remember { mutableStateOf(false) }
-    Column(modifier = modifier) {
+    Column(modifier = modifier,
+//        verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
