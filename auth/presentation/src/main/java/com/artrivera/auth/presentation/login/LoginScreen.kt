@@ -192,7 +192,7 @@ fun LoginScreen(
 
 @Preview
 @Composable
-fun LoginScreenPreview(modifier: Modifier = Modifier) {
+fun LoginScreenPreview() {
     RunStoryTheme {
         LoginScreen(
             state = LoginState(),

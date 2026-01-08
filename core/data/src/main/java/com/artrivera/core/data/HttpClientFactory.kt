@@ -4,7 +4,6 @@ import com.artrivera.core.domain.Session
 import com.artrivera.core.domain.SessionStorage
 import com.artrivera.core.domain.utils.Result
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
