@@ -25,7 +25,7 @@ class HttpClientFactory(
 ) {
 
     fun build(): HttpClient {
-        return HttpClient(CIO) {
+        return HttpClient {
             install(ContentNegotiation) {
                 json(
                     json = Json {

@@ -27,6 +27,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -95,6 +96,10 @@ fun LoginScreen(
        onAction(LoginAction.OnChangeEmail(email.text.toString()))
     }
 
+    LaunchedEffect(password.text) {
+        onAction(LoginAction.OnChangePassword(password.text.toString()))
+    }
+
     GradientBackground {
         Column(
             modifier = Modifier
@@ -121,6 +126,7 @@ fun LoginScreen(
                 state = email,
                 startIcon = EmailIcon,
                 endIcon = null,
+                keyboardType = KeyboardType.Email,
                 hint = stringResource(R.string.example_email),
                 title = stringResource(R.string.email),
                 additionalInfo = null,
@@ -141,7 +147,7 @@ fun LoginScreen(
             RunStoryActionButton(
                 text = stringResource(R.string.login),
                 isLoading = state.isLoading,
-                enabled = state.canLogin,
+                enabled = state.canLogin && !state.isLoading,
                 onClick = {
                     onAction(LoginAction.OnLoginClick)
                 }

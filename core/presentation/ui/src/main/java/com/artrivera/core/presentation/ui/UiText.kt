@@ -9,7 +9,7 @@ sealed interface UiText {
 
     data class DynamicString(val value: String) : UiText
 
-    data class StringResource(@StringRes val id: Int, val args: List<Any> = emptyList()) : UiText
+    data class StringResource(@param:StringRes val id: Int, val args: List<Any> = emptyList()) : UiText
 
     @Composable
     fun asString(): String {

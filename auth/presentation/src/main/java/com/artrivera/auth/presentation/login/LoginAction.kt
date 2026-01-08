@@ -6,4 +6,6 @@ sealed interface LoginAction {
     data object OnRegisterClick: LoginAction
 
     data class OnChangeEmail(val email: String) : LoginAction
+
+    data class OnChangePassword(val password: String): LoginAction
 }

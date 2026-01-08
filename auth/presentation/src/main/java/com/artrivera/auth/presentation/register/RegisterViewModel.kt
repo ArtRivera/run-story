@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -55,12 +57,13 @@ class RegisterViewModel(
             _state
                 .distinctUntilChangedBy { it.password }
                 .debounce(200)  // Wait 200ms after last change
-                .collect { it ->
+                .onEach {
                     val newPasswordValidationState = userDataValidator.validatePassword(it.password)
                     _state.value = _state.value.copy(
                         passwordValidationState = newPasswordValidationState
                     )
                 }
+                .launchIn(viewModelScope)
         }
     }
 
